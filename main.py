@@ -73,6 +73,7 @@ vector_store = FAISS.from_documents(chunks, embeddings)
 print(f"Vector store created successfully and stored {vector_store.index.ntotal} vectors.")
 
 # Step 3: Retrieval and Augmentation
+# Increased k to 8 for better retrieval coverage.
 retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 8})
 
 try:
@@ -87,6 +88,8 @@ Use the following pieces of retrieved context to answer the user's question.
 If the answer requires specific personal or schedule details (like office hours, contact info, or availability), provide them **formally and structuredly**, making sure to include **all** associated details like names, email addresses, phone numbers, and specific times.
 If the question asks for availability at a specific time, then answer from TAs only, respond by listing the available individuals/entities in an easy-to-read, structured format (e.g., bullet points or a table).
 If you cannot find the answer in the context, clearly state that you do not have that information.
+
+Note: If user mention time, always convert it to (AM to PM) if they didn't mention AM/PM in files.
 
 Context:
 {context}

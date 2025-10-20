@@ -1,3 +1,5 @@
+# requirements.txt
+streamlit
 langchain-community
 langchain-google-genai
 langchain-core
@@ -6,3 +8,4 @@ langchain-huggingface
 python-dotenv
 sentence-transformers
 faiss-cpu
+unstructured[pdf,docx]
