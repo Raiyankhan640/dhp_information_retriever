@@ -1,3 +1,5 @@
+# Demo
+![Demo of Document Q&A Assistant](images/demo.png)
 
 
 # ❓ Document Q&A Assistant
