@@ -65,6 +65,39 @@ streamlit run app.py
 - Ask questions in the chat interface
 - Get instant, structured answers
 
+## Docker
+You can run this app in Docker (recommended for isolation). The repository includes a `Dockerfile` configured to run the Streamlit app.
+
+### Build the image
+```bash
+docker build -t document-qa-app .
+```
+
+### Run the container (local testing)
+Pass required environment variables (for example `GEMINI_API_KEY`) using `-e` or a `.env` file.
+```bash
+# Example: run with an environment variable
+docker run -p 8501:8501 -e GEMINI_API_KEY="your_key_here" document-qa-app
+
+# Or using a .env file
+docker run --env-file .env -p 8501:8501 document-qa-app
+```
+
+### Tips to reduce image size
+- Use the included `.dockerignore` to exclude large files and virtual environments.
+- Avoid installing heavy ML packages in the image if not used (for example large `torch` builds pulled in by some embedding packages).
+- If the image becomes very large, inspect layers and prune unused images:
+```bash
+docker image ls
+docker image prune -a
+```
+
+### Rebuild without cache
+If you changed dependencies and want a clean build:
+```bash
+docker build --no-cache -t document-qa-app .
+```
+
 ## Notes
 - The `myenv` folder (virtual environment) is excluded from version control via `.gitignore`.
 - Only the required packages for this project are listed in `requirements.txt`.
